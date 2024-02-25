@@ -1,4 +1,5 @@
-﻿using MagicVilla_WebApi.Models;
+﻿using MagicVilla_WebApi.Data;
+using MagicVilla_WebApi.Models;
 using MagicVilla_WebApi.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +12,17 @@ namespace MagicVilla_WebApi.Controllers
         [HttpGet]
         public IEnumerable<VillaDto> GetVillas()
         {
-            return new List<VillaDto>
+            return VillaStore.VillaList;
+        }
+        [HttpGet("VillaDetails/")]
+        public IActionResult GetVilla([FromQuery] Guid id)
+        {
+            var villaToReturn = VillaStore.VillaList.SingleOrDefault(villa => villa.Id == id);
+            if (villaToReturn == null)
             {
-                new VillaDto{ Id = Guid.NewGuid(), Name = "Villa Tunis" },
-                new VillaDto{ Id = Guid.NewGuid(), Name = "Villa Marsa" },
-            };
+                return NotFound();
+            }
+            return Ok(villaToReturn);
         }
     }
 }
