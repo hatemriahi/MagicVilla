@@ -1,4 +1,5 @@
 ﻿using MagicVilla_WebApi.Models;
+using MagicVilla_WebApi.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MagicVilla_WebApi.Controllers
@@ -8,12 +9,12 @@ namespace MagicVilla_WebApi.Controllers
     public class VillaApiController : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<Villa> GetVillas()
+        public IEnumerable<VillaDto> GetVillas()
         {
-            return new List<Villa>
+            return new List<VillaDto>
             {
-                new Villa{ Id = Guid.NewGuid(), Name = "Villa" },
-                new Villa{ Id = Guid.NewGuid(), Name = "Villa" },
+                new VillaDto{ Id = Guid.NewGuid(), Name = "Villa Tunis" },
+                new VillaDto{ Id = Guid.NewGuid(), Name = "Villa Marsa" },
             };
         }
     }
